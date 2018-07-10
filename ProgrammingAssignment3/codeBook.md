@@ -1,4 +1,4 @@
-## Code Book for wearable data collected and Cleansed
+## Code Book for wearable data collected and cleansed
 _____________________________________________________________________________________________________________________________________________
 ### subjectid
 	Subjects are people who contributed to collect data for this experiment with accelerometer and gyroscope. 
