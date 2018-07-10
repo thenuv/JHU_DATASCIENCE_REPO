@@ -43,6 +43,8 @@ ________________________________________________________________________________
 ______________________________________________________________________________________________________________
 ### Processing done by run_analysis.R :
 
+The script has a function runAnaysis() which does the bellow task,
+
 * Loads libries required (dplyr, readr etc...)
 * Imports Activity Lables
 * Imports Variable names from features file 
@@ -56,7 +58,7 @@ ________________________________________________________________________________
 * Merges Subjects and Activity details using rowid.
 * Merges Measurement data with Subject & Activity using row id into data frame named "researchdataset".
 * Creates a new data frame "researchdataset_avg" with Summary of Average for SUBJECT, ACTIVITY on the Variables.
-* Creates a csv file "wearable_data_avg_summary.csv" from data frame "researchdataset_avg".
+* Creates a text file "wearable_data_avg_summary.txt" from data frame "researchdataset_avg".
 
 ______________________________________________________________________________________________________________
 ### Reference : 

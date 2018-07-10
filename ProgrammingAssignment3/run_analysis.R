@@ -10,6 +10,8 @@
 # Created on : 2018.07.10
 # Author : thenuv
 
+runAnaysis <- function() {
+        
 # Load Libraries
 library("tidyr")
 library("stringr")
@@ -76,9 +78,15 @@ researchdataset <- merge(researchdataset, measuretest, by.x = "rowid", by.y = "r
 researchdataset_avg <- researchdataset %>% select (-1,-3) %>% group_by( subjectid, activitydesc) %>% summarise_all(mean, na.rm=T)
 
 # Create a csv file for the above
-write.csv (researchdataset_avg, file= 'wearable_data_avg_summary.csv', row.names=FALSE)
+#write.csv (researchdataset_avg, file= 'wearable_data_avg_summary.csv', row.names=FALSE)
+
+# Create a text file with write.table()
+write.table(researchdataset_avg, file="wearable_data_avg_summary.txt", row.names = FALSE)
+
 
 # z<- fread("wearable_data_avg_summary.csv", sep = ",", header= TRUE)
+
+}
 
 
 
