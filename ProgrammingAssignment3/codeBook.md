@@ -59,293 +59,293 @@ ________________________________________________________________________________
 	It represents the average for subjectid and activitydesc.
 		
 ### tGravityAcc-mean()-Z
-		This variable is collected from accelerometer in Z direction of gravity summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Z direction of gravity summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tGravityAcc-std()-X
-		This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 		
 ### tGravityAcc-std()-Y
-		This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tGravityAcc-std()-Z
-		This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in X direction of gravity summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAccJerk-mean()-X
-		This variable is a measurement of body linear acceleration from jerk signal in X direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body linear acceleration from jerk signal in X direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 		
 ### tBodyAccJerk-mean()-Y
-		This variable is a measurement of body linear acceleration from jerk signal in Y direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body linear acceleration from jerk signal in Y direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAccJerk-mean()-Z
-		This variable is a measurement of body linear acceleration from jerk signal in Z direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is a measurement of body linear acceleration from jerk signal in Z direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyAccJerk-std()-X
-		This variable is a measurement of body linear acceleration from jerk signal in X direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body linear acceleration from jerk signal in X direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAccJerk-std()-Y
-		This variable is a measurement of body linear acceleration from jerk signal in Y direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is a measurement of body linear acceleration from jerk signal in Y direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyAccJerk-std()-Z
-		This variable is a measurement of body linear acceleration from jerk signal in Z direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body linear acceleration from jerk signal in Z direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyro-mean()-X
-		This variable is collected from gyroscope in X direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is collected from gyroscope in X direction of body summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyro-mean()-Y
-		This variable is collected from gyroscope in Y direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from gyroscope in Y direction of body summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyro-mean()-Z
-		This variable is collected from gyroscope in Z direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from gyroscope in Z direction of body summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyro-std()-X
-		This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyro-std()-Y
-		This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyro-std()-Z
-		This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from gyroscope in X direction of body summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyroJerk-mean()-X
-		This variable is a measurement of body angular velocity from jerk signal in X direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body angular velocity from jerk signal in X direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyroJerk-mean()-Y
-		This variable is a measurement of body angular velocity from jerk signal in Y direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is a measurement of body angular velocity from jerk signal in Y direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroJerk-mean()-Z
-		This variable is a measurement of body angular velocity from jerk signal in Z direction summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is a measurement of body angular velocity from jerk signal in Z direction summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroJerk-std()-X
-		This variable is a measurement of body angular velocity from jerk signal in X direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is a measurement of body angular velocity from jerk signal in X direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroJerk-std()-Y
-		This variable is a measurement of body angular velocity from jerk signal in Y direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body angular velocity from jerk signal in Y direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyroJerk-std()-Z
-		This variable is a measurement of body angular velocity from jerk signal in Z direction summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is a measurement of body angular velocity from jerk signal in Z direction summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAccMag-mean()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyAccMag-std()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of body summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of body summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tGravityAccMag-mean()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of gravity summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of gravity summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 
 ### tGravityAccMag-std()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of body summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer of body summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyAccJerkMag-mean()
-		This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAccJerkMag-std()
-		This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyGyroMag-mean()
-		This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroMag-std()
-		This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroJerkMag-mean()
-		This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	
 ### tBodyGyroJerkMag-std()
-		This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
-		Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 _____________________________________________________________________________________________________________________________________________
 ### fBodyAcc-mean()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyAcc-mean()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyAcc-mean()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAcc-std()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAcc-std()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAcc-std()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAccJerk-mean()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in X direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-	
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in X direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+
 ### fBodyAccJerk-mean()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Y direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Y direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAccJerk-mean()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Z direction from body using accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Z direction from body using accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyAccJerk-std()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in X direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in X direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAccJerk-std()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Y direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Y direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyAccJerk-std()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Z direction from body using accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on Jerk signals in Z direction from body using accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyGyro-mean()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using gyroscope summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using gyroscope summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyGyro-mean()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using gyroscope summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using gyroscope summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyGyro-mean()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using gyroscope summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using gyroscope summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyGyro-std()-X
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using gyroscope summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in X direction from body using gyroscope summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyGyro-std()-Y
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using gyroscope summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Y direction from body using gyroscope summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyGyro-std()-Z
-		This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using gyroscope summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is measured by applying Fast Fourier Transform (FFT) on signals in Z direction from body using gyroscope summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAccMag-mean()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyAccMag-std()
-		This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyBodyAccJerkMag-mean()
-		This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyBodyAccJerkMag-std()
-		This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional Jerk signals were calculated using the Euclidean norm from accelerometer summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyBodyGyroMag-mean()
-		This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyBodyGyroMag-std()
-		This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
-		
+	This variable is the magnitude of three-dimensional signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
+	
 ### fBodyBodyGyroJerkMag-mean()
-		This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by mean. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 ### fBodyBodyGyroJerkMag-std()
-		This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
-		Unit of measurement is Frequency.
-		It represents the average for subjectid and activitydesc.
+	This variable is the magnitude of three-dimensional Jerk signals from gyroscope were calculated using the Euclidean norm summarized by standard deviation. 
+	Unit of measurement is Frequency.
+	It represents the average for subjectid and activitydesc.
 
 
 ### Feature Selection 
