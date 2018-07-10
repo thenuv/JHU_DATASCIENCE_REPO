@@ -7,47 +7,48 @@ ________________________________________________________________________________
 _____________________________________________________________________________________________________________________________________________
 ### activitydesc 
 	Activity description has following 6 activities for which data is collected on different variables.
-1 WALKING
-2 WALKING_UPSTAIRS
-3 WALKING_DOWNSTAIRS
-4 SITTING
-5 STANDING
-6 LAYING
+* 1 WALKING
+* 2 WALKING_UPSTAIRS
+* 3 WALKING_DOWNSTAIRS
+* 4 SITTING
+* 5 STANDING
+* 6 LAYING
 
 _____________________________________________________________________________________________________________________________________________
 ### tBodyAcc-mean()-X
-		This variable is collected from accelerometer in X direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		(Refer "Feature Selection" at the end of this code book for more details on the measurement.
+	This variable is collected from accelerometer in X direction of body summarized by mean. 
+	Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	(Refer "Feature Selection" at the end of this code book for more details on the measurement.
 		
 ### tBodyAcc-mean()-Y
-		This variable is collected from accelerometer in Y direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Y direction of body summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAcc-mean()-Z
-		This variable is collected from accelerometer in Z direction of body summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Z direction of body summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tBodyAcc-std()-X
-		This variable is collected from accelerometer in X direction of body summarized by standard deviation. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
-		(Refer "Feature Selection" at the end of this code book for more details on the measurement.
+	This variable is collected from accelerometer in X direction of body summarized by standard deviation. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
+	(Refer "Feature Selection" at the end of this code book for more details on the measurement.
 
 ### tBodyAcc-std()-Y
-		This variable is collected from accelerometer in Y direction of body summarized by standard deviation. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Y direction of body summarized by standard deviation. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 		
 ### tBodyAcc-std()-Z
-		This variable is collected from accelerometer in Z direction of body summarized by standard deviation. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Z direction of body summarized by standard deviation. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 		
 ### tGravityAcc-mean()-X
-		This variable is collected from accelerometer in X direction of gravity summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in X direction of gravity summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 
 ### tGravityAcc-mean()-Y
-		This variable is collected from accelerometer in Y direction of gravity summarized by mean. Unit of measurement is Time.
-		It represents the average for subjectid and activitydesc.
+	This variable is collected from accelerometer in Y direction of gravity summarized by mean. Unit of measurement is Time.
+	It represents the average for subjectid and activitydesc.
 		
 ### tGravityAcc-mean()-Z
 		This variable is collected from accelerometer in Z direction of gravity summarized by mean. Unit of measurement is Time.
@@ -285,7 +286,7 @@ ________________________________________________________________________________
 
 
 ### Feature Selection 
-=====================================================================================
+=================================================================================
 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
@@ -344,4 +345,4 @@ tBodyGyroJerkMean
 
 The complete list of variables of each feature vector is available in 'features.txt'
 
-=====================================================================================
+=================================================================================
