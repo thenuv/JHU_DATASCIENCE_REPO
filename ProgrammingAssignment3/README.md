@@ -30,11 +30,16 @@ ________________________________________________________________________________
 ______________________________________________________________________________________________________________
 ### Files as part of this package:
 
-* codeBook.md -> Variables of the data set with a brief description and their unit of measurement
-* run_analysis.R -> R script to cleanse, organise and build the data set.
-* wearable_data_avg_summary.csv -> Final out put data set summarizing the average of variables by subject, activity.
- 
+* codeBook.md : Variables of the data set with a brief description and their unit of measurement
+	https://github.com/thenuv/JHU_DATASCIENCE_REPO/blob/master/ProgrammingAssignment3/codeBook.md
 
+* run_analysis.R : R script to cleanse, organise and build the data set.
+	https://github.com/thenuv/JHU_DATASCIENCE_REPO/blob/master/ProgrammingAssignment3/run_analysis.R
+
+* wearable_data_avg_summary.csv : Final out put data set summarizing the average of variables by subject, activity.
+	https://github.com/thenuv/JHU_DATASCIENCE_REPO/blob/master/ProgrammingAssignment3/wearable_data_avg_summary.csv
+
+	
 ______________________________________________________________________________________________________________
 ### Processing done by run_analysis.R :
 
