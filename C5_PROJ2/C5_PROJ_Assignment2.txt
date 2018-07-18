@@ -1,0 +1,274 @@
+/* Fixes
+
+suppress warning
+options(scipen = 999)
+
+*/
+http://rpubs.com/thenuv/405356
+
+
+setwd("E:/DataScience/Rwork/data")
+getwd()
+
+fileurl <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+filename <- "StromData.bz2"
+
+if (!file.exists(filename)) {
+        download.file(fileurl, filename)
+}
+if (!(file.exists(filename) )) {
+        unzip(filename)
+}
+
+source('E:/DataScience/Rwork/StromData.R')
+#strom_data <- read.csv(filename, header = TRUE)
+#df <- strom_data[, c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP", "BGN_DATE")]
+
+df <- read.csv(filename, header = TRUE) [, c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")]
+head(df)
+
+strom_df <- read.csv(filename, header = TRUE) [, c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")]
+
+library(R.utils)
+bunzip2(filename, "StromData.csv",  remove = FALSE)
+
+
+library(data.table)
+strom_df <- fread("StromData.csv", sep = ",", header= TRUE)  [, c("EVTYPE", "FATALITIES", "INJURIES", "PROPDMG", "PROPDMGEXP", "CROPDMG", "CROPDMGEXP")]
+
+
+
+* Assumed that Event is classified by the Department and not re profiled. 
+* CROPDMGEXP/ PROPDMGEXP values calculated for  B, M, K & H as Billion, Million, Thousand & Hundred (other values taken as is)
+
+
+
+
+#1 EVENTTYPE most harmfull for human health
+
+EVTYPE
+FATALITIES
+INJURIES
+
+library(dplyr)
+h <- 	select (df, EVTYPE, FATALITIES, INJURIES) %>%	
+	group_by(EVTYPE) %>%  
+	summarize (TOTAL_FATALITIES = sum(FATALITIES, na.rm = TRUE), 	TOTAL_INJURIES= sum(INJURIES, na.rm = TRUE))
+
+# h <- df %>% group_by(EVTYPE) %>% summarize (TOTAL_FATALITIES = sum(FATALITIES, na.rm = TRUE), TOTAL_INJURIES= sum(INJURIES, na.rm = TRUE))
+h <- arrange(h, desc(TOTAL_FATALITIES ), desc(TOTAL_INJURIES))
+h[1,]
+hf <- round(h$TOTAL_FATALITIES[1] /sum(h$TOTAL_FATALITIES, na.rm=TRUE) *100, 2)
+hi <- round(h$TOTAL_INJURIES[1] /sum(h$TOTAL_INJURIES, na.rm=TRUE) *100, 2)
+
+
+/*
+grep("TORNADO", h$EVTYPE, value=TRUE)
+grep("WIND", h$EVTYPE, value=TRUE)
+grep("FLOOD", h$EVTYPE, value=TRUE)
+h[EVTYPE %in% grep("TORNADO", h$EVTYPE, value=TRUE), ]
+*/
+
+#2 EVENTTYPE with great economic consequence
+
+PROPDMG
+PROPDMGEXP
+CROPDMG
+CROPDMGEXP
+BGN_DATE
+
+# scientific notation off
+options(scipen = 999)
+
+ 
+d <- df %>% select (EVTYPE, PROPDMG, PROPDMGEXP, CROPDMG, CROPDMGEXP) 
+d = within(d, {
+	cval=NA 
+	cval[CROPDMGEXP != ""]=1
+	cval[CROPDMGEXP %in% c("H","h")]=100
+	cval[CROPDMGEXP %in% c("K","k")]=1000
+	cval[CROPDMGEXP %in% c("M","m")]=1000000
+	cval[CROPDMGEXP %in% c("B", "b")]=1000000000
+})
+d<- d %>% mutate ( CROPVALUE = cval * CROPDMG)
+d = within(d, {
+	pval=NA 
+	pval[PROPDMGEXP != ""]=1
+	pval[PROPDMGEXP %in% c("H","h")]=100
+	pval[PROPDMGEXP %in% c("K","k")]=1000
+	pval[PROPDMGEXP %in% c("M","m")]=1000000
+	pval[PROPDMGEXP %in% c("B", "b")]=1000000000
+})
+d<- d %>% mutate ( PROPVALUE = pval * PROPDMG)
+d<- d %>% mutate ( DAMAGEVALUE = PROPVALUE + CROPVALUE)
+# d<- arrange(d, desc(DAMAGEVALUE))
+
+#d <- d %>% group_by(EVTYPE) %>% summarize (TOTALDAMAGEVALUE = sum(DAMAGEVALUE, na.rm = TRUE))
+d <- select(d, EVTYPE, DAMAGEVALUE) %>% group_by(EVTYPE) %>% summarize (TOTALDAMAGEVALUE = sum(DAMAGEVALUE, na.rm = TRUE))
+d <- arrange(d, desc(TOTALDAMAGEVALUE ))
+d[1,]
+d1 <- round(d$TOTALDAMAGEVALUE[1] /sum(d$TOTALDAMAGEVALUE, na.rm=TRUE) *100, 2)
+inj <- head(h, 10)
+dmg <- head(d,10)
+
+# plots
+
+inj$EVTYPE <- as.character(inj$EVTYPE)
+
+ref :
+ggplot(inj, aes(x=reorder(EVTYPE,-TOTAL_FATALITIES), y=TOTAL_FATALITIES, fill=reorder(EVTYPE,-TOTAL_FATALITIES))) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x=element_text(angle=45, vjust=0.5))
+
+#FATALITIES
+ggplot(inj, aes(x=reorder(EVTYPE,-TOTAL_FATALITIES), y=TOTAL_FATALITIES, fill=reorder(EVTYPE, -TOTAL_FATALITIES))) +
+geom_bar(stat="identity" )  +
+labs(title = "TOP 10 EVENTS WITH HIGH FATALITIES ") + labs(x = "EVENT TYPE") +
+theme(
+	legend.position="none",
+	axis.text.x=element_text(angle=90, vjust=0.5), 
+	plot.title = element_text(color= "brown", size = 14, face = "bold", hjust = 1/2)
+)
+
+
+
+ggplot(inj, aes(x=reorder(EVTYPE, -TOTAL_FATALITIES), y=TOTAL_FATALITIES, fill=reorder(EVTYPE, -TOTAL_FATALITIES))) +
+geom_bar(stat="identity" )  +
+labs(title = "EVENTS WITH TOP 10 FATALITIES ") + labs(x = "EVENT TYPE") +
+theme(
+	legend.position="none",
+	axis.text.x=element_text(angle=90, vjust=0.5), 
+	plot.title = element_text(color= "brown", size = 14, face = "bold", hjust = 1/2)
+) + coord_flip()
+
+#INJURIES
+ggplot(inj, aes(x=reorder(EVTYPE, -TOTAL_INJURIES), y=TOTAL_INJURIES, fill=reorder(EVTYPE, -TOTAL_INJURIES))) +
+geom_bar(stat="identity" )  +
+labs(title = "TOP 10 EVENTS FOR INJURIES") + labs(x = "EVENT TYPE") +
+theme(
+	legend.position="none",
+	axis.text.x=element_text(angle=90, vjust=0.5), 
+	plot.title = element_text(color= "brown", size = 14, face = "bold", hjust = 1/2)
+) 
+
+
+# Economic losses
+ggplot(dmg, aes(x=reorder(EVTYPE, -TOTALDAMAGEVALUE), y=TOTALDAMAGEVALUE/1000000000, fill=reorder(EVTYPE, -TOTALDAMAGEVALUE))) +
+geom_bar(stat="identity" )  +
+labs(title = "TOP 5 EVENTS Causing Economic Damage") + labs(x = "EVENT TYPE", y="Estimated Damage in Billion $") +
+theme(
+	legend.position="none",
+	axis.text.x=element_text(angle=90, vjust=0.5), 
+	plot.title = element_text(color= "brown", size = 14, face = "bold", hjust = 1/2)
+) 
+
+
+qplot(TOTAL_FATALITIES, data=inj, fill=EVTYPE)
+qplot(TOTAL_FATALITIES, EVTYPE,  data=inj )
+
+
+ggplot(inj,aes(factor(EVTYPE),TOTAL_FATALITIES)) 
+geom_bar(stat="identity")
+g <- ggplot(inj, aes(EVTYPE, TOTAL_FATALITIES)) 
+g <- geom_line(col=c("red")) 
+
++ facet_grid(.~type)
+
+
+summary(d$CROPVALUE, na.rm=TRUE)
+5000000000
+summary(d$PROPVALUE, na.rm=TRUE)
+
+sub("B|b", 1000000000, p$CROPDMGEXP)
+sub("M|m", "1000000", p$CROPDMGEXP)
+sub("K|k", "1000", p$CROPDMGEXP)
+sub("H|h", "1000", p$CROPDMGEXP)
+#  case_when(
+		CROPDMGEXP %in% c("B", "b") ~ CROPDMG*1000000000, 
+		CROPDMGEXP %in% c("M", "m") ~ CROPDMG*1000000,
+		CROPDMGEXP %in% c("K", "k") ~ CROPDMG*1000,
+		CROPDMGEXP %in% c("H", "h") ~ CROPDMG*100,
+		CROPDMGEXP == "" ~ NA 
+		)
+ )	TRUE ~ CROPDMG
+ 
+ #with (d, switch(CROPDMGEXP, "B" = "Billion"))
+ 
+		
+p <- d %>% group_by (CROPDMGEXP) %>%  summarize (counts = n())  
+d %>% group_by (PROPDMGEXP) %>%  summarize (counts = n())  
+
+
+#transform(p, CROPDMGEXP = 1000 [(CROPDMGEXP=="B")])
+p = within(p, {
+	val=NA 
+	val[CROPDMGEXP != ""]=1
+	val[CROPDMGEXP %in% c("H","h")]=100
+	val[CROPDMGEXP %in% c("K","k")]=1000
+	val[CROPDMGEXP %in% c("M","m")]=1000000
+	val[CROPDMGEXP %in% c("B", "b")]=1000000000
+})
+
+
+
+
+/*
+p <- table(df$CROPDMGEXP)
+prop.table(p)
+*/
+prop.table(df$PROPDMGEXP)
+table(df$CROPDMGEXP)
+
+ 
+
+
+
+df$PROPDMGEXP == "B"
+df$CROPDMGEXP == "B"
+
+df[df$PROPDMGEXP == "B", ]
+
+
+
+/*
+
+> names(strom_data)
+ [1] "STATE__"    "BGN_DATE"   "BGN_TIME"   "TIME_ZONE"  "COUNTY"     "COUNTYNAME" "STATE"      "EVTYPE"     "BGN_RANGE"  "BGN_AZI"    "BGN_LOCATI"
+[12] "END_DATE"   "END_TIME"   "COUNTY_END" "COUNTYENDN" "END_RANGE"  "END_AZI"    "END_LOCATI" "LENGTH"     "WIDTH"      "F"          "MAG"       
+[23] "FATALITIES" "INJURIES"   "PROPDMG"    "PROPDMGEXP" "CROPDMG"    "CROPDMGEXP" "WFO"        "STATEOFFIC" "ZONENAMES"  "LATITUDE"   "LONGITUDE" 
+[34] "LATITUDE_E" "LONGITUDE_" "REMARKS"    "REFNUM"   
+
+
+> summary(df$INJURIES, na.rm=TRUE)
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+   0.0000    0.0000    0.0000    0.1557    0.0000 1700.0000 
+> df[df$INJURIES==1700,]
+        EVTYPE FATALITIES INJURIES PROPDMG PROPDMGEXP CROPDMG CROPDMGEXP          BGN_DATE
+157885 TORNADO         42     1700     250          M       0            4/10/1979 0:00:00
+
+> summary(df$FATALITIES, na.rm=TRUE)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+  0.0000   0.0000   0.0000   0.0168   0.0000 583.0000 
+  
+> df[df$FATALITIES==583,]
+       EVTYPE FATALITIES INJURIES PROPDMG PROPDMGEXP CROPDMG CROPDMGEXP          BGN_DATE
+198704   HEAT        583        0       0                  0            7/12/1995 0:00:00
+
+
+max(df$PROPDMGEXP)
+ 
+ table(df$PROPDMGEXP)
+ table(df$CROPDMGEXP)
+ 
+ > table(df$PROPDMGEXP)
+            -      ?      +      0      1      2      3      4      5      6      7      8      B      h      H      K      m      M 
+465934      1      8      5    216     25     13      4      4     28      4      5      1     40      1      6 424665      7  11330 
+> table(df$CROPDMGEXP)
+
+            ?      0      2      B      k      K      m      M 
+618413      7     19      1      9     21 281832      1   1994 
+
+
+/* Peer Review
+http://rpubs.com/ChengSeng/405344
+http://rpubs.com/changcon/405064
