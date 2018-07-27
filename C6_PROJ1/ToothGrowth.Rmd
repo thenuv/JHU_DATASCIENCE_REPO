@@ -1,0 +1,161 @@
+---
+title: "ToothGrowth An Inferential Study"
+author: "thenuv"
+date: "26 July 2018"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+This study is using the ToothGrowth data set provided with R. There are about 60 samples collected on guineapigs. There are 2 Delivery methods(supp) **OJ** (Orange Juice) & **VC** (Asorbic acid) which were provided to 30 of the animals. They received 3 different Dose levels **0.5, 1, 2**. With inferential statistical methods this analysis would find significance of tooth growth with Dose / Delivery method.
+
+
+## Data Summary
+
+```{r Toothgrowth}
+data("ToothGrowth") # Load Data
+str(ToothGrowth)
+table(ToothGrowth$supp, ToothGrowth$dose)
+summary(ToothGrowth)
+
+```
+
+## Exploratory Analysis
+```{r exp_plot, out.width='80%'  }
+suppressMessages(library(ggplot2))
+g <- ggplot(ToothGrowth, aes(dose, len)) +
+        geom_boxplot(aes(fill=supp)) +
+        geom_jitter(alpha=I(3/4), aes(color=supp)) +
+        theme(legend.position=c(1,0.3),legend.justification=c(1,1)) + 
+        scale_color_manual(values=c("orange","slateblue")) + 
+        labs(title="Tooth Length vs Dose",x="Dose Levels",y="Tooth Length") 
+print(g)
+```
+
+From the plot it looks the tooth length increases as the dose level goes up.
+*OJ* method looks to have higher median than the other method. The data has the potential to analyse if there is relationship between dose vs length, method vs length and with the combination of both.
+
+
+## Assumptions
+-  The sample size represent the population.
+-  The length of the tooth in the animals are assumed to be fairly same when the test was begun.
+-  The t-test pairing is set to false as the groups are independent of each other. 
+-  Variance is treated as not equal for the t-test.
+-  A 95% confidence interval is taken for analysis.
+
+
+## Hypothesis Testing
+
+### Tooth Length Vs Delivery
+Null Hypothesis: There is no correlation between Tooth length and Delivery method.
+We will test it with *Student's T* method using Confidence intervals.
+
+``` {r Hyp_1, results='hide'}
+
+# Test for Delivery method
+
+t.test(len ~ supp, data = ToothGrowth, paired = FALSE, var.equal = FALSE )
+
+```
+ 
+The ***p-value = 0.06063*** which is above .05 and we *fail to reject this null hypothesis*.
+
+ *Refer to the Appendix for the t test output*
+
+
+### Tooth Length Vs Dose
+
+Null Hypothesis: There is no correlation on toothlength based on dose provided for the animals.
+
+``` {r Hyp_2, results='hide'}
+# Subset 
+dose_05_1 <- ToothGrowth[ToothGrowth$dose %in% c(0.5,1), ] # Subset for dose 0.5 & 1
+dose_05_2 <- ToothGrowth[ToothGrowth$dose %in% c(0.5,2), ] # Subset for dose 0.5 & 2
+dose_1_2 <- ToothGrowth[ToothGrowth$dose %in% c(1,2), ] # Subset for dose 1 & 2
+
+# Test for dose
+t.test(len ~ dose, data = dose_05_1, paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = dose_05_2, paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = dose_1_2, paired = FALSE, var.equal = FALSE )
+
+```
+
+-  ***p-value = 0.0000001268**          : Reject Null Hypothesis*
+-  ***p-value = 0.00000000000004398**   : Reject Null Hypothesis*
+-  ***p-value = 0.00001906**            : Reject Null Hypothesis*
+
+There is significance on tooth length and dose. The p value for all levels are bellow .05, so we should look for the alternate hypothesis.
+ 
+
+
+### Tooth Length Vs Dlivery method for specific Dose
+
+Null Hypothesis: For a specfic dose level,  there is no correlation between the Delivery method and tooth length.
+
+``` {r Hyp_3, results='hide'}
+# Subset
+dose_05 <- ToothGrowth[ToothGrowth$dose %in% c(0.5), ] # Subset for dose 0.5
+dose_1 <- ToothGrowth[ToothGrowth$dose %in% c(1), ] # Subset for dose 1
+dose_2 <- ToothGrowth[ToothGrowth$dose %in% c(2), ] # Subset for dose 2
+
+# Test for Delivery method
+t.test(len ~ supp, data = dose_05, paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = dose_1, paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = dose_2, paired = FALSE, var.equal = FALSE )
+
+```
+
+-  ***p-value = 0.006359**      : Reject Null Hypothesis*
+-  ***p-value = 0.001038**      : Reject Null Hypothesis*
+-  ***p-value = 0.9639**        : Accecpt Null Hypothesis (p >.05)*
+
+At dose level .05 and 1 "OJ" method shows a higher length (refer to the mean in the output for t test in the appendix). There is not much impact for dose level 2 on either methods.
+ 
+ 
+ 
+## Conclusion
+
+-   Mean of Tooth length for dose **0.5, 1 & 2 are 10.605, 19.735 & 26.100** respectively. This shows there is significance on the length of the tooth with the dose given.
+-  From the hypothesis test performed, there is *not much impact* on Delivery method on the length of the tooth.
+-  There is *significance* on length of the tooth with different dose levels.
+-  For a dose level **0.5 & 1** the Delivery method **Orange Juice** has higher tooth growth. For dose level at **2** there is *not much signicance* with either Delivery method.
+ 
+ 
+ 
+___
+## Appendix
+ 
+### Test Output for Length Vs Delivery method
+``` {r Hyp_1_out}
+t.test(len ~ supp, data = ToothGrowth, paired = FALSE, var.equal = FALSE )
+
+```
+
+ 
+### Test Output for Length Vs Dose
+ 
+ 
+``` {r Hyp_2_out}
+
+t.test(len ~ dose, data = dose_05_1, paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = dose_05_2, paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = dose_1_2, paired = FALSE, var.equal = FALSE )
+
+```
+
+ 
+### Test Output for Length Vs Dlivery method for specific Dose
+ 
+``` {r Hyp_3_out}
+
+t.test(len ~ supp, data = dose_05, paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = dose_1, paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = dose_2, paired = FALSE, var.equal = FALSE )
+
+```
+___

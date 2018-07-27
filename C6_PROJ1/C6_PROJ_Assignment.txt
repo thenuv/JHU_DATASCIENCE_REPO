@@ -1,0 +1,137 @@
+Central Limit Theorem on exponential distribution
+
+
+n <- 40
+lambda <- .2
+samplesize <- 1000
+
+###  Compute Stats by Theory
+mean_by_theory <- 1/lambda
+variance_by_theory <- mean_by_theory ^2 / samplesize
+ci_by_theory <- mean_by_theory + c(-1,1) * qnorm(.975) * sqrt(variance_by_theory) / sqrt(samplesize)
+
+
+mean_by_theory
+variance_by_theory
+ci_by_theory 
+
+### Compute Stats by Simulation
+
+set.seed(4)
+
+simulation_df <- matrix(rexp(n * samplesize, lambda), n, samplesize)
+simulation_df <- as.data.frame(simulation_df)
+#dim(simulation_df)
+
+sim_mean <- rowMeans(simulation_df)
+simulation_df$sim_mean <-  rowMeans(simulation_df)
+#hist(simulation_df$sim_mean, breaks = seq(2,9, by = .2), col = "khaki", 
+	xlab = "Simulated Mean", main ="Histogram of Simulated Mean")
+abline(v=mean(simulation_df$sim_mean), col="blue", lwd=3)
+
+
+hist(simulation_df$sim_mean, breaks = seq(4,6, by = .1), col = "khaki",
+	xlab = "Simulated Mean", main ="Histogram of Simulated Mean")
+abline(v=mean(simulation_df$sim_mean), col="blue", lwd=2)
+lines(density(simulation_df$sim_mean), col ="darkgreen", lwd=3 )
+lines(density(simulation_df$sim_mean, adjust=2), lty="dotted", lwd=3)
+
+# lines(density(simulation_df$sim_mean), col="blue", lwd=2) 
+# lines(density(simulation_df$sim_mean, adjust=2), lty="dotted", col="darkgreen", lwd=2) 
+
+hist(simulation_df[,1], breaks = seq(0,10, by = .2), col = "grey")
+
+mean_by_Simulation <- mean(sim_mean)
+variance_by_simulation <- var(sim_mean)
+ci_by_simulation <- mean_by_Simulation + c(-1,1) * qnorm(.975) *sqrt(variance_by_simulation) / sqrt(samplesize)
+
+mean_by_Simulation 
+variance_by_simulation 
+ci_by_simulation 
+
+cltfunc <- function(x, n) (mean(x) - mu) / SE
+cltfunc <- function(x, mu) (x - mu) / sqrt(variance_by_simulation)
+
+hist(simulation_df[,1], col="grey", freq=FALSE,
+	xlab = "Simulated Values", ylab="Lambda", main ="Histogram of Random Exponential")
+lines(density(simulation_df[,1]), col="brown", lwd=2)
+lines(density(simulation_df[,1], adjust=2), lty="dotted")
+
+d1 <- data.frame(mean_by_Simulation, variance_by_simulation, ci_by_simulation) 
+
+library(ggplot2)
+ggplot(simulation_df, aes(x = sim_mean)) + 
+  geom_histogram(aes(y = ..density..), binwidth = 5) + 
+  geom_density()
+
+ggplot(simulation_df, aes(x = simulation_df[,1])) + 
+  geom_histogram(aes(y = ..density..), binwidth = 5) + 
+  geom_density()
+
+qqnorm(simulation_df$sim_mean)
+qqline(simulation_df$sim_mean)
+
+
+
+### Variance Comparision
+Variance by Theory : **`r variance_by_theory `** .
+Vairance for Simulated data : **`r variance_by_simulation `** .
+
+### Distribution
+Confidence Interval by Theory : ** 'r ci_by_theory`**.
+Confidence Interval by Simulation : ** 'r ci_by_simulation`**.
+
+
+
+______________________________________________________________________________________________________
+#2 ToothGrowth
+
+options(scipen = 999)
+
+t.test(len ~ supp, data = ToothGrowth, paired = FALSE, var.equal = FALSE )
+95 percent confidence interval:
+ -0.1710156  7.5710156
+p-value = 0.06063
+
+
+t.test(len ~ dose, data = ToothGrowth[ToothGrowth$dose %in% c(0.5,1), ], paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = ToothGrowth[ToothGrowth$dose %in% c(0.5,2), ], paired = FALSE, var.equal = FALSE )
+t.test(len ~ dose, data = ToothGrowth[ToothGrowth$dose %in% c(1,2), ], paired = FALSE, var.equal = FALSE )
+p-value = 0.0000001268
+p-value = 0.00000000000004398
+p-value = 0.00001906
+
+t.test(len ~ supp, data = ToothGrowth[ToothGrowth$dose %in% c(0.5), ], paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = ToothGrowth[ToothGrowth$dose %in% c(1), ], paired = FALSE, var.equal = FALSE )
+t.test(len ~ supp, data = ToothGrowth[ToothGrowth$dose %in% c(2), ], paired = FALSE, var.equal = FALSE )
+p-value = 0.006359
+p-value = 0.001038
+p-value = 0.9639
+
+
+Mean of Tooth length for dose 0.5, 1, 2 are 10.605, 19.735, 26.100 respectively.
+This shows there is significance on the length of the tooth with the dose given.
+
+From the hypothesis test performed, there is not much impact on Delivery method on the length of the tooth.
+There is significance on length of the tooth with different dose levels.
+For a dose level 0.5 & 1 the Delivery method Orange Juice has higher tooth growth. For dose level at 2 there is not much signicance with either Delivery method.
+
+
+ToothGrowth$len[ToothGrowth$supp == "OJ",]
+
+
+______________________________________________________________________________________________________
+
+/* Rmd
+
+-   **Mean** : Sample Mean vs Theoritical mean of distribution.
+-   **Variance** : Variance comparision between Sample and Theoritical value of the distribution.
+-   **Distribution** : Exponential and Simulated Distributions.
+
+output: github_document
+
+/* Peer Review
+
+2.
+https://s3.amazonaws.com/coursera-uploads/peer-review/7411cf4bf04d900735490d1a4b36bed0/peer_assignment_2.html
+
