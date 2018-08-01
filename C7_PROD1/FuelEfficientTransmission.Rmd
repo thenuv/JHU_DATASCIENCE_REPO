@@ -1,0 +1,115 @@
+---
+title: "A Study on Fuel Efficient Transmission Type"
+author: "thenuv"
+date: "31 July 2018"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Executive Summary 
+
+The convenience of automatic transmission in cars leads to the question of fuel inefficiency. To provide an insight on if its the case, we studied the dataset *mtcars* to explore the possible outcomes applying Linear Regression model.
+
+If we measure the fuel efficiency with type of transmission alone (Automatic/manual), then manual seems to be more efficient. But while including other correlated variables, we could infer Automatic is similar to manual type transmission.
+
+
+## Data Processing
+
+```{r cars}
+suppressWarnings(library(ggplot2))
+suppressWarnings(library(car))
+options(scipen = 999)
+data("mtcars")
+mtcars$am<-factor(mtcars$am)
+levels(mtcars$am)<-c("automatic", "manual")
+```
+We use the mtcars dataset collected by Motor trend in 1974. There are 32 observations and 11 variables. Variable ***am*** represents the transmission type. We convert them into factor and name accordingly. Following Variables are used in the Analysis.
+
+-   **mpg**	 Miles/(US) gallon
+-   **cyl**	 Number of cylinders
+-   **wt**	 Weight (1000 lbs)
+-   **am**	 Transmission (0 = automatic, 1 = manual)
+-   **disp**	 Displacement (cu.in.)
+
+## Exploratory Ananylsis
+
+``` {r expanalysis}
+summary(mtcars$mpg[mtcars$am=="automatic"])
+summary(mtcars$mpg[mtcars$am=="manual"])
+m <- lm(mpg ~ am -1, mtcars)
+summary(m)$coef
+# boxplot(mpg ~ am, data=mtcars, ylab = "Miles / Gallon")
+# qplot(x=wt, y=mpg, color=am,  data=mtcars, ylab = "Miles / Gallon", xlab = "Weight (lbs/1000)")
+t.test(mtcars$mpg[mtcars$am=="automatic"], mtcars$mpg[mtcars$am=="manual"])$p.value
+```
+The mean of miles per gallon looks higher for manual when it's looked as the only predictor (Ref: Box plot in the appendix). However we could observe from the scatter plot, as the other variables like weight and cylinders increase there is not much difference due between automatic and manual. From the t test pvalue its evident there is significance on transmission type with the mileage. We reject the null hypothesis and look for more details.
+
+
+## Model the Analysis
+
+``` {r AnanlyseVIF}
+fit <- lm(mpg ~ ., data = mtcars)       # Fit a model with all variables with mpg as outcome
+vif(fit)        # Get the variable inflation factor
+```
+
+With the above we could see variables *cyl, wt, disp* has higher impact on mpg compared to other variables. We will model with those.
+
+``` {r Linear Models}
+m1 <- lm (mpg ~ am, mtcars)             # Model m1 with mpg and Transmission type
+m2 <- lm (mpg ~ am + wt , mtcars)       # Model m2 as m1 + variable weight
+m3 <- lm (mpg ~ am + wt + cyl , mtcars) # Model m3 as m2 + variable cylinder
+m4 <- lm (mpg ~ am + wt + cyl + disp, mtcars) # Model m4 as m3 + variable displacement
+#anova(m1, m2, m3, m4) # Compare Models
+```
+
+Model m4 has a p value greater than 0.05 hence we choose the model 3 for our interpretation. *Refer to the Model summary for details in the appendix.*
+
+
+## Conclusion
+There was noticeable difference between manual and automatic transmission  by mean (~7 mpg, Ref Appendix). Based on the linear model with impact of confounding variables *Weight & Cylinders* and a *95%* confidence interval *(-2.495555 2.848541)*, it seems Manual tranmission might yield about *0.17* miles more per gallon than a automatic. We could conclude the type of transmission yield similar mileage as the vehicle weighs more and houses a powerful engine.
+
+___
+\newpage
+
+
+## Appendix
+
+### Plot Graphs for Analysis
+``` {r PlotGraph, out.width='70%' }
+boxplot(mpg ~ am, data=mtcars, ylab = "Miles / Gallon")
+qplot(x=wt, y=mpg, color=am,  data=mtcars, ylab = "Miles / Gallon", xlab = "Weight (lbs/1000)")
+```
+
+### Compare Models
+``` {r Comp}
+anova(m1, m2, m3, m4) # Compare Models
+```
+
+### Model Summary
+
+``` {r ModelSummary}
+summary(m1)$coef     # Model m1 with mpg and Transmission type
+summary(m2)$coef     # Model m2 as m1 + variable weight
+summary(m3)     # Model m3 as m2 + variable cylinder
+summary(m4)$coef     # Model m3 as m2 + variable cylinder
+confint(m3)[2,] # Confidence Intervals for Model m3 at 95%
+```
+
+
+### T Test Report
+``` {r ttestRep}
+t.test(mtcars$mpg[mtcars$am=="automatic"], mtcars$mpg[mtcars$am=="manual"])
+```
+
+
+### Residual Plots
+``` {r res, out.width='80%' }
+par(mfcol = c(2,2))
+plot(m3)
+```
