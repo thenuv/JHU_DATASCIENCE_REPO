@@ -1,0 +1,144 @@
+---
+title: "Human Activity Recognition - A Prediction with Wearables"
+author: "thenuv"
+date: "3 August 2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+This is a study with data on Human activity recognition. A prediction is made on the way in which the exercise was performed. There are 2 datasets for Tranining and Test. Tree based modeling was built for the traning set and a subset of it is used to evaluate the prediction. After comparing the models, the choosen one is used to predict the test set.
+
+
+## Data Processing
+
+```{r DataProcess}
+# Load Libraries
+suppressWarnings(library(caret))
+suppressWarnings(library(randomForest))
+suppressWarnings(library(rpart))
+suppressWarnings(library(rpart.plot))
+
+# Download Data
+fileurl1 <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
+fileurl2 <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv"
+filename1 <- "pml_training.csv"
+filename2 <- "pml_testing.csv"
+if (!file.exists(filename1)) {
+        download.file(fileurl1, filename1)
+}
+
+if (!file.exists(filename2)) {
+        download.file(fileurl2, filename2)
+}
+# Import Data
+df_train <- read.csv(filename1) 
+df_test <- read.csv(filename2) 
+
+```
+
+## Clense & Explore 
+        As part of cleansing and filtering, the following approach is used to remove some variables as they may not contribute as predictors in the model to be trained.
+
+-   Filter Near Zero Variance Columns
+-   Misc columns like Name, X & timestamp
+-   Columns having NA's.
+
+``` {r Explore}
+dim(df_train)
+dim(df_test)
+#str(df_train)
+#str(df_test)
+table(df_train$classe)
+
+# Filter Near Zero Variance columns
+NZV <- nearZeroVar(df_train, saveMetrics = TRUE)
+#head(NZV,10)
+df_train <- df_train[,!NZV$nzv] 
+df_test <- df_test[,!NZV$nzv]
+
+# Drop columns which wont be used in the study
+drops <- grepl("^X|user_name|timestamp", names(df_train))
+df_train <- df_train[,!drops] 
+df_test <- df_test[,!drops]
+
+# Retain columns not having NA's
+nonnacol <- (colSums(is.na(df_train)) == 0)
+df_train <- df_train[, nonnacol] 
+df_test <- df_test[, nonnacol] 
+
+dim(df_train)
+dim(df_test)
+
+```
+
+
+
+```{r ModelPrep}
+
+# Split training data into training and validation
+set.seed(2345)
+inTrain <- createDataPartition(df_train$classe, p=.70, list=FALSE)
+training <- df_train[inTrain, ]
+validation <- df_train[-inTrain, ]
+dim(training)
+dim(validation)
+
+```
+
+### Model 1 with rpart approach
+ Tree based rpart model is built on training set as bellow.
+```{r MD1 }
+md1 <- rpart(classe ~. , data=training, method="class")
+prp(md1)
+
+```
+
+Predict Model 1 with Validation data set.
+```{r ValidateMD1}
+
+predict1 <- predict(md1, validation, type="class")
+confusionMatrix (validation$classe, predict1)
+
+accuracy_md1 <- postResample(predict1, validation$classe)[1]
+se_md1 <- 1- as.numeric(confusionMatrix(validation$classe, predict1)$overall[1])
+
+```
+The estimated *accuracy* for this model is ***74.71%*** with expected out of sample error ***25.29%***.
+
+### Model 2 Random Forest approach
+ We apply the Random Forest method to train the data. Cross validation with 5 fold opton is specified in the traning control parameters.
+ 
+``` {r MD2}
+md2 <- train(classe~., data=training, method="rf", trControl = trainControl(method="cv", 5), ntree=50)
+md2
+
+
+```
+
+Predict with  Model2 on validation data set.
+```{r Validate}
+# Validate
+predict2 <- predict(md2, validation)
+confusionMatrix(validation$classe, predict2)
+accuracy_md2 <- postResample(predict2, validation$classe)[1]
+se_md2 <- 1- as.numeric(confusionMatrix(validation$classe, predict2)$overall[1])
+
+```
+The outcome accuracy is estimated at ***99.69%*** with sample error of ***0.31% ***. 
+
+## Predict Test Data
+Since the estimated outcome accuracy of Random Forest approach is better than the other model, we use it to predict the test data set. 
+``` {r PredictTest}
+# Predict Test
+predictTest <- predict(md2, df_test)
+predictTest
+```
+
+
+### Reference
+http://groupware.les.inf.puc-rio.br/har
