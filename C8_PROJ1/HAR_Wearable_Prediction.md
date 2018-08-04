@@ -6,38 +6,17 @@ thenuv
 Overview
 --------
 
-This is a study with data on Human activity recognition. A prediction is made on the way in which the exercise was performed. There are 2 datasets for Tranining and Test. Tree based modeling was built for the traning set and a subset of it is used to evaluate the prediction. After comparing the models, the choosen one is used to predict the test set.
+This is a study with data on Human activity recognition. A prediction is made on the way in which the exercise was performed. There are 2 datasets for Training and Test. Tree based modelling was built for the training set and a subset of it is used to evaluate the prediction. After comparing the models, the chosen one is used to predict the test set.
 
 Data Processing
 ---------------
 
 ``` r
 # Load Libraries
-suppressWarnings(library(caret))
-```
-
-    ## Loading required package: lattice
-
-    ## Loading required package: ggplot2
-
-``` r
-suppressWarnings(library(randomForest))
-```
-
-    ## randomForest 4.6-14
-
-    ## Type rfNews() to see new features/changes/bug fixes.
-
-    ## 
-    ## Attaching package: 'randomForest'
-
-    ## The following object is masked from 'package:ggplot2':
-    ## 
-    ##     margin
-
-``` r
-suppressWarnings(library(rpart))
-suppressWarnings(library(rpart.plot))
+suppressMessages(suppressWarnings(library(caret)))
+suppressMessages(suppressWarnings(library(randomForest)))
+suppressMessages(suppressWarnings(library(rpart)))
+suppressMessages(suppressWarnings(library(rpart.plot)))
 
 # Download Data
 fileurl1 <- "https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv"
@@ -56,13 +35,13 @@ df_train <- read.csv(filename1)
 df_test <- read.csv(filename2) 
 ```
 
-Clense & Explore
-----------------
+Cleanse & Explore
+-----------------
 
-        As part of cleansing and filtering, the following approach is used to remove some variables as they may not contribute as predictors in the model to be trained.
+As part of cleansing and filtering, the following approach is used to remove some variables as they may not contribute as predictors in the model to be trained.
 
--   Filter Near Zero Variance Columns
--   Misc columns like Name, X & timestamp
+-   Filter near Zero Variance Columns
+-   Misc. columns like Name, X & timestamp
 -   Columns having NA's.
 
 ``` r
@@ -88,13 +67,13 @@ table(df_train$classe)
     ## 5580 3797 3422 3216 3607
 
 ``` r
-# Filter Near Zero Variance columns
+# Filter near Zero Variance columns
 NZV <- nearZeroVar(df_train, saveMetrics = TRUE)
 #head(NZV,10)
 df_train <- df_train[,!NZV$nzv] 
 df_test <- df_test[,!NZV$nzv]
 
-# Drop columns which wont be used in the study
+# Drop columns which won't be used in the study
 drops <- grepl("^X|user_name|timestamp", names(df_train))
 df_train <- df_train[,!drops] 
 df_test <- df_test[,!drops]
@@ -272,7 +251,11 @@ Since the estimated outcome accuracy of Random Forest approach is better than th
 ``` r
 # Predict Test
 predictTest <- predict(md2, df_test)
+predictTest
 ```
+
+    ##  [1] B A B A A E D B A A B C B A E E A B B B
+    ## Levels: A B C D E
 
 ### Reference
 
