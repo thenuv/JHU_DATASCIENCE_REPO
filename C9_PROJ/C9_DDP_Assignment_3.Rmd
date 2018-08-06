@@ -1,0 +1,32 @@
+---
+title: "DDP Assignment3"
+author: "thenuv"
+date: "6 August 2018"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Overview
+
+#### This is a simple presentation of leading universities in US based on their Ranking using plotly.
+
+```{r cars, message=FALSE, warning=FALSE, comment=''}
+library(plotly)
+df_unv <- read.csv("TopUniversityLocations.csv")
+df_unv<- df_unv[order(df_unv$Rank),c(4,3)]
+df_unv
+```
+
+*Ref*
+https://www.topuniversities.com/university-rankings-articles/world-university-rankings/top-universities-us-2018
+
+
+## Histogram of University Ranks
+``` {r }
+
+plot_ly(df_unv, x = ~UniversityName, y =~Rank, type = "bar", color = I("steelblue"))
+
+```
