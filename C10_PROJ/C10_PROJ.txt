@@ -1,0 +1,343 @@
+
+setwd("E:/DataScience/Rwork/data/final/en_US")
+getwd()
+
+Ref :  
+https://rpubs.com/bradleyboehmke/41172
+http://rstudio-pubs-static.s3.amazonaws.com/256588_57b585da6c054349825cba46685d8464.html
+
+
+https://en.wikipedia.org/wiki/Katz%27s_back-off_model
+
+
+ggplot https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html
+
+
+fileurl1 <- "https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip"
+filename1 <- "Coursera_SwiftKey.zip"
+
+if (!file.exists(filename1)) {
+        download.file(fileurl1, filename1)
+}
+Content type 'application/zip' length 574661177 bytes (548.0 MB)
+downloaded 548.0 MB
+
+if (file.exists(filename1) ) {
+        unzip(filename1)
+}
+
+-- Junk in news file 
+
+
+
+/**************************************
+
+Tasks to accomplish
+
+WK1: 
+# Tokenization - identifying appropriate tokens such as words, punctuation, and numbers. Writing a function that takes a file as input and returns a tokenized version of it.
+# Profanity filtering - removing profanity and other words you do not want to predict.
+
+# Exploratory Analysis
+# Word Frequencies
+
+
+
+**************************************/
+
+cleanFiles<-function(file,newfile){
+    writeLines(iconv(readLines(file,skipNul = TRUE)),newfile)
+}
+
+
+
+Quiz 1:
+myfiles <- "E:/DataScience/Rwork/data/final/en_US/en_US.twitter.txt"
+
+lapply(myfiles, function(x){
+                         as.integer(system2("wc",
+                                            args = c("-l",
+                                                     x,
+                                                     " | awk '{print $1}'"),
+                                            stdout = TRUE))
+                      }
+                  )
+
+library(R.utils)
+sapply(myfiles,countLines)
+
+countLines(myfiles)
+2360148
+
+https://unix.stackexchange.com/questions/150800/find-length-of-longest-line-in-all-text-files-in-a-directory
+awk ' { if ( length > L ) { L=length} }END{ print L}' file.txt
+
+on git:
+awk ' { if ( length > L ) { L=length} }END{ print L}' en_US.twitter.txt
+144
+awk ' { if ( length > L ) { L=length} }END{ print L}' en_US.news.txt
+11384
+
+awk ' { if ( length > L ) { L=length} }END{ print L}' en_US.blogs.txt
+40833
+
+
+https://unix.stackexchange.com/questions/137609/string-pattern-searching
+grep -ci "Love" sample.txt
+grep -ci "hate" sample.txt
+
+grep -ci "Love" en_US.twitter.txt
+117760
+
+grep -ci "hate" en_US.twitter.txt
+25221
+
+
+grep -ci "biostats" en_US.twitter.txt
+cat en_US.twitter.txt | grep -ai "biostats" 
+i know how you feel.. i have biostats on tuesday and i have yet to study =/
+
+cat en_US.twitter.txt | grep -c "A computer once beat me at chess, but it was no match for me at kickboxing" 
+3
+
+
+
+library(data.table)
+df <- fread("E:/DataScience/Rwork/data/final/en_US/sample.txt", header= FALSE)
+#, nrows=100
+
+
+fname <- "E:/DataScience/Rwork/data/final/en_US/sample.txt"
+con <- file(fname, open="r")
+ln <- readLines(con)
+for (i in 1:length(ln)) {
+	print(ln[i])
+}
+close(con)
+
+
+
+con <- file(fname, open="r")
+  while ( TRUE ) {
+    line = readLines(con, n = 1)
+    if ( length(line) == 0 ) {
+      break
+    }
+    print(line)
+  }
+
+
+  while ( TRUE ) {
+    line = readLines(con, n = 1)
+    if ( length(line) == 0  | is.null(line) ) {
+	print("In Break")
+        break
+    } else {
+	print(line)
+    if ((grep("[Ll][Oo][Vv][Ee]", line)) == 1) {
+	    print(line)
+	}
+    }
+  }
+
+"[Ll][Oo][Vv][Ee]"
+"[Hh][Aa][Tt][Ee]"
+
+
+    if ((grep("[Hh][Aa][Tt][Ee]", line)) == 1) {
+	    print(line)
+	}
+
+
+cleanFiles<-function(file,newfile){
+    writeLines(iconv(readLines(myfiles, skipNul = TRUE)),newfile)
+}
+
+
+x<-readLines("sample.txt")
+
+for (i in 1:length(x) ) {
+  data<-read.table(textConnection(x[[i]]))
+  print(data)
+}
+
+
+
+install.packages(c("ggplot2", "e1071", "caret", "quanteda", 
+                   "irlba", "randomForest"))
+
+install.packages(c("quanteda", "irlba"))
+
+
+#Explore
+sm <- apply(df_tw.token.df, 2, sum)
+sm <- as.data.frame(sm)
+sm2 <- data.frame(word = rownames(sm), counts = sm)
+names(sm2) <- c("word", "counts")
+rownames(sm2) <- NULL
+head(sm2[order(sm2$counts, decreasing = TRUE),], 25)
+
+
+######################################################################################################
+
+https://rpubs.com/mszczepaniak/predictkbo1preproc
+https://rpubs.com/mszczepaniak/predictkbo3model
+
+https://thachtranerc.wordpress.com/2016/04/12/katzs-backoff-model-implementation-in-r/
+https://github.com/ThachNgocTran/KatzBackOffModelImplementationInR
+
+https://rstudio-pubs-static.s3.amazonaws.com/262214_7addf9c4e6de4e08863144fad6565a4a.html#1
+
+https://gitlab.com/yongjun21/DataScienceCapstone
+
+kneser-ney
+https://stackoverflow.com/questions/39758038/how-do-i-train-my-kneser-ney-model-for-next-word-prediction-to-estimate-my-disco
+
+######################################################################################################
+
+Final Project :
+Requirement 
+Shiny App
+
+https://github.com/mark-blackmore/JHU-Data-Science-Capstone
+
+
+
+# write Ngrams to file
+write.csv(x, file ="unigram.txt", row.names = FALSE, col.names = NULL, quote = FALSE)
+write.csv(y, file ="bigram.txt", row.names = FALSE, col.names = NULL, quote = FALSE)
+write.csv(z, file ="trigram.txt", row.names = FALSE, col.names = NULL, quote = FALSE)
+
+unigram <- read.csv("unigram.txt")
+bigram <- read.csv("bigram.txt")
+trigram <- read.csv("trigram.txt")
+
+#KBO :
+
+gama2 <- 0.5
+gama3 <- 0.5
+
+inpText <- "right_now"
+inpText <- "new_york"
+
+
+grep("new_york", trigram$feature)
+
+getTriGramObservation <- function(bi_phrase, trigram) {
+	i <- gsub(" ",  "_", paste(bi_phrase, ""))
+	idx <- grep(i, trigram$feature)
+	if (length idx > 0 ) {
+		t <- trigram[idx, ]
+	}
+	return(t)
+}
+
+---- Misc
+
+str_split_fixed (obsTrigs, "_", 3)[, 3]
+sprintf ("%s%s%s", "^", unigram$ngram[1], "_")
+
+https://www.statmethods.net/graphs/bar.html
+i <- predictNextWord("new york")
+barplot(i$prob, main = "Probability of Next word", horiz = TRUE, names.arg = i$ngram)
+barplot(i$prob[1:5], main = "Probability of Next word", horiz = TRUE, names.arg = i$ngram[1:5])
+
+barplot(i$prob[1:5], main = "Probability of Next word", names.arg = i$ngram[1:5], ylab="Probality", col = "tan")
+
+
+library(ggplot2)
+trigram <- read.csv("trigram.txt", stringsAsFactors = FALSE, nrows = 20)[,c("feature", "frequency")]
+p3 <- ggplot(trigram, aes(x= reorder(feature, frequency), y=frequency)) +
+        theme_bw() +
+        geom_bar(stat="identity", width = .2, color ="slateblue")+
+        labs(y= "Text Count", x= "Word",
+             title = "3 GRAMS") +
+        coord_flip() 
+
+
+Shiny app : User info
+
+Overview 
+This application gives the possible next word with prediction based on Katz Back Off model. A 5% sample of data from News, Blogs & Twitter was randomly picked using binomial logic to get a proportionate data of total volume. The sample corpus was used to build the ngrams. 
+
+
+Model Info
+Katz Back Off model is applied to predict the next word the user could type based on the history from sample corpus. The discount rates gamma2 and gamma3 were set at 0.5.
+Link 
+
+
+How to Use
+Type in few words in the Text box in the left of the application and submit. The output tab will display the possible next word with a graph for top 5 words with higher probability. A table below displays first 10 possible words with their probability.
+
+Top 20 Trigram
+
+Reference: 
+
+
+NGRAM Fix :
+
+UG : 3916015 (sum)
+BG : 3725162 
+TG : 3535771 
+
+
+d <- data.frame(word = c("a", "b", "c", "d", "e"), freq = c(100,70,60,40,30) )
+d$prop <- d$freq/sum(d$freq)
+d$csum <- cumsum(d$prop)
+d [d$csum <= .90,]
+
+d <- data.frame(word = c("a", "b", "c", "d", "e"), freq = c(100,70,60,40,30) )
+d$csum <- cumsum(d$freq)
+d[d$csum <= (sum(d$freq)*.9), ]
+
+x$prop <- x$frequency/sum(x$frequency)
+x$csum <- cumsum(x$frequency)
+x1 <- x[x$csum <= (sum(x$frequency)*.9), ]
+
+
+y$csum <- cumsum(y$frequency)
+y1 <- y[y$csum <= (sum(y$frequency)*.9), ]
+
+z$csum <- cumsum(z$frequency)
+z1 <- z[z$csum <= (sum(z$frequency)*.9), ]
+
+
+? Accuracy
+ Time / optimize
+
+/*
+
+Group addition 
+
+https://www.zeemaps.com/edit/cv0zId_xkFFwD2rgjwKwhjbIt6vqxaNU
+
+*/
+
+/* peer reiview 
+
+Report:
+http://rpubs.com/ChengSeng/416181
+http://rpubs.com/padawone/milestone_report
+https://marinjorian.neocities.org/milestoneReport.html
+
+
+*/
+
+https://thenuv.shinyapps.io/NextPossibleWord/
+http://rpubs.com/thenuv/416688
+
+/* Peer review capstone
+https://jmttest.shinyapps.io/Capstone/
+http://rpubs.com/JMT/416494
+
+https://ranikw.shinyapps.io/Data-Science-Capstone2/
+https://rpubs.com/ranikrw/final_presentation
+
+https://darrylma.shinyapps.io/predict_next_word/
+http://rpubs.com/darrylma/416533
+
+https://mchotfunk.shinyapps.io/DataScience-CapStone-NLP/
+http://www.rpubs.com/swarnaravi/416823
+
+https://mchotfunk.shinyapps.io/DataScience-CapStone-NLP/
+http://rpubs.com/mchotfunk/416788

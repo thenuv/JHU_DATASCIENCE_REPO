@@ -16,7 +16,7 @@ How to Use
 - Type in few words in the Text box in the left of the application and submit. 
 - The output tab will display the possible next word with a graph for top 5 words with higher probability. 
 - A table below displays first 10 possible words with their probability.
-
+- The response time taken to process is displayed in seconds.
 
 
 Preprocessing
@@ -28,12 +28,15 @@ The Corpus is built with the following approach.
 - Convert Case
 - Remove Stop words
 - Profanity Filtering
-- Steming
+
+The stop words are not removed and Steming skipped on the corpus to get better prediction.
 
 
 Prediction Model
 ========================================================
 
 Katz Back Off model is applied to predict the next word the user could type based on the history from sample corpus. The discount rates gamma2 and gamma3 were set at 0.5 for redistributing the probablity of unobserved words. 
+When a single word is provided Bigram approach is used. For 2 or more input words the last 2 words are considered and a Trigram approach is applied.
+
 
 

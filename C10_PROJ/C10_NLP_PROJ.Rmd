@@ -27,7 +27,6 @@ suppressMessages(suppressWarnings(library(quanteda)))
 suppressMessages(suppressWarnings(library(ggplot2)))
 suppressMessages(suppressWarnings(library(caret)))
 
-
 # Download Data
 # fileurl1 <- "https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip"
 # filename1 <- "Coursera_SwiftKey.zip"
@@ -60,6 +59,9 @@ write.csv(tweet_text, file ="sample.tweet.txt", row.names = FALSE, col.names = N
 write.csv(blog_text, file ="sample.blog.txt", row.names = FALSE, col.names = NULL, quote = FALSE)
 write.csv(news_text, file ="sample.news.txt", row.names = FALSE, col.names = NULL, quote = FALSE)
 
+# Lines or Documents in each data set
+c(length(tweet_text), length(blog_text), length(news_text))
+
 ```
 
 ### Read Data from the sample
@@ -91,6 +93,7 @@ ___
 
 ```{r Explore, echo=TRUE, eval=TRUE }
 
+dim(corp)                              # Observations in Sample
 length(which(!complete.cases(corp)))   # Check for incomplete cases
 corp$Text <- as.character(corp$Text)   # Convert to Char
 corp$Length <- nchar(corp$Text)        # Add a column with Text length
@@ -224,15 +227,16 @@ myDfm3
 ```
 ___
 ## Findings
-  
-- There about 15K features or words with 1gram out of 130K dataset.
-- 2gram and 3gram has 89K words.
+
+- There about 15K features or words with 1gram out of 130K documents.
+- 2grams and 3grams has 89K words.
 - There were about 10% of non English words.
 
 ___
 ## Conclusion
 
 The preprocessed corpus will be used for modeling the predictions in the project.
-Katz Back Off model will be used to predict the next word.
+Katz Back Off model will be used to predict the next word. There will be a simple app build on Shiny to take user input for few word and the next word will be predicted with the model developed. The output would display the top 5 or 10 possible words with higher probability.
+
 ___
 
